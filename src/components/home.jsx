@@ -3,6 +3,7 @@ import * as React from "react";
 import { useGetProductsQuery } from "../services/storeAPI";
 import ProductCard from "./product_card";
 import Box from "@mui/material/Box";
+import Pagination from "@mui/material/Pagination";
 import { useSelector, useDispatch } from "react-redux";
 import { setProducts } from "../slices/productSlice";
 
@@ -65,6 +66,11 @@ export default function HomePage() {
           }}
         >
           {products}
+          <Pagination
+            count={products.length/10}
+            variant="outlined"
+            shape="rounded"
+          />
         </Box>
       </div>
     );
