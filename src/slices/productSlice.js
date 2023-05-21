@@ -15,8 +15,14 @@ export const productSlice = createSlice({
         (element) => element.category === action.payload
       );
     },
+    searchProducts: (state, action) => {
+      state.filteredProducts = state.products.filter((element) =>
+        element.title.toLowerCase().includes(action.payload.toLowerCase())
+      );;
+    },
   },
 });
 
-export const { setProducts, filterProducts } = productSlice.actions;
+export const { setProducts, filterProducts, searchProducts } =
+  productSlice.actions;
 export default productSlice.reducer;
