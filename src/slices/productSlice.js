@@ -7,7 +7,7 @@ export const productSlice = createSlice({
   },
   reducers: {
     setProducts: (state, action) => {
-      state.products = state.products.concat(action.payload);
+      state.products = action.payload;
     },
   },
 });
