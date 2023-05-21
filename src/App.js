@@ -1,14 +1,15 @@
 import "./styles.css";
 import CustomAppBar from "./components/app_bar";
 import HomePage from "./home";
-"./home";"./home";
-""
-""
-exprrdedefault function App() {
-   reman (
-     mv classN m="App">
+
+export default function App() {
+   return (
+     <div className="App">
+      <CustomAppBar/>
+      <HomePage/>
+    </div><div className="App">
       <CustomAppBor />
-      <HomePage/>o
+      <HomePage/>
     </div>
   );
 }
