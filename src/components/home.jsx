@@ -9,8 +9,10 @@ import { setProducts } from "../slices/productSlice";
 export default function HomePage() {
   const { data, isSuccess, error, isLoading } = useGetProductsQuery();
   const Allproducts = useSelector((state) => state.products.products);
+  const FilteredProducts = useSelector(
+    (state) => state.products.filteredProducts
+  );
   const dispatch = useDispatch();
-
   if (isLoading) {
     return (
       <div className="Home">
@@ -19,20 +21,38 @@ export default function HomePage() {
     );
   } else if (isSuccess) {
     dispatch(setProducts(data));
-    const products = Allproducts.map((product) => {
-      return (
-        <div key={product.id}>
-          <ProductCard
-            category={product.category}
-            rating={product.rating}
-            image={product.image}
-            title={product.title}
-            description={product.description}
-            price={product.price}
-          />
-        </div>
-      );
-    });
+    var products;
+    if (FilteredProducts.length > 0) {
+      products = FilteredProducts.map((product) => {
+        return (
+          <div key={product.id}>
+            <ProductCard
+              category={product.category}
+              rating={product.rating}
+              image={product.image}
+              title={product.title}
+              description={product.description}
+              price={product.price}
+            />
+          </div>
+        );
+      });
+    } else {
+      products = Allproducts.map((product) => {
+        return (
+          <div key={product.id}>
+            <ProductCard
+              category={product.category}
+              rating={product.rating}
+              image={product.image}
+              title={product.title}
+              description={product.description}
+              price={product.price}
+            />
+          </div>
+        );
+      });
+    }
     return (
       <div className="Home">
         <Box
