@@ -1,10 +1,10 @@
-import "./styles.css";
+import "../styles.css";
 import * as React from "react";
-import { useGetProductsQuery } from "./services/storeAPI";
-import ProductCard from "./components/product_card";
+import { useGetProductsQuery } from "../services/storeAPI";
+import ProductCard from "./product_card";
 import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
-import { setProducts } from "./slices/productSlice";
+import { setProducts } from "../slices/productSlice";
 
 export default function HomePage() {
   const { data, isSuccess, error, isLoading } = useGetProductsQuery();
