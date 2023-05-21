@@ -8,13 +8,15 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import { useDispatch } from "react-redux";
+import { searchProducts } from "../slices/productSlice";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: alpha(theme.palette.common.black, 0.15),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.black, 0.25),
   },
   marginLeft: 0,
   width: "100%",
@@ -52,9 +54,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function CustomAppBar() {
+  const dispatch = useDispatch();
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+    dispatch(searchProducts(event.target.value));
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ bgcolor: "teal" }}>
+      <AppBar
+        elevation={2}
+        position="static"
+        sx={{ bgcolor: "white", color: "#000000" }}
+        white
+      >
         <Toolbar>
           <IconButton
             size="large"
@@ -66,7 +79,7 @@ export default function CustomAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography
-            variant="h6"
+            variant="h4"
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
@@ -78,6 +91,8 @@ export default function CustomAppBar() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+              value={searchTerm}
+              onChange={handleChange}
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
             />

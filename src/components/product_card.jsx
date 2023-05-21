@@ -10,11 +10,13 @@ import Box from "@mui/material/Box";
 
 export default function ProductCard(props) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, mb: 5 }} elevation={2}>
       <CardMedia sx={{ height: 140 }} image={props.image} title={props.title} />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div" align="left">
-          {props.title}
+        <Typography gutterBottom variant="h6" component="div" align="left">
+          {props.title.length > 25
+            ? `${props.title.substring(0, 25)}...`
+            : props.title}
         </Typography>
         <Box
           sx={{
@@ -34,7 +36,9 @@ export default function ProductCard(props) {
           </Box>
         </Box>
         <Typography variant="body2" color="text.secondary" align="left">
-          {props.description}
+          {props.description.length > 100
+            ? `${props.description.substring(0, 100)}...`
+            : props.description}
         </Typography>
       </CardContent>
       <CardActions>
