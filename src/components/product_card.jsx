@@ -41,7 +41,7 @@ export default function ProductCard(props) {
             : props.description}
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions disableSpacing>
         <Box
           sx={{
             display: "flex",
