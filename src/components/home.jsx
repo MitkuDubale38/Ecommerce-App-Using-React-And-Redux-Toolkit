@@ -3,6 +3,7 @@ import * as React from "react";
 import { useGetProductsQuery } from "../services/storeAPI";
 import ProductCard from "./product_card";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
 import { useSelector, useDispatch } from "react-redux";
 import { setProducts } from "../slices/productSlice";
@@ -42,6 +43,7 @@ export default function HomePage() {
       products = Allproducts.map((product) => {
         return (
           <div key={product.id}>
+             <Grid container spacing={20}>
             <ProductCard
               category={product.category}
               rating={product.rating}
@@ -56,7 +58,7 @@ export default function HomePage() {
     }
     return (
       <div className="Home">
-        <Box
+        {/* <Box
           m={1}
           p={2}
           sx={{
@@ -64,14 +66,16 @@ export default function HomePage() {
             flexWrap: "wrap",
             justifyContent: "space-between",
           }}
-        >
+        > */}
+        <Grid container spacing={20}>
           {products}
-          <Pagination
-            count={products.length/10}
-            variant="outlined"
-            shape="rounded"
-          />
-        </Box>
+        </Grid>
+        <Pagination
+          count={products.length / 10}
+          variant="outlined"
+          shape="rounded"
+        />
+        {/* </Box> */}
       </div>
     );
   } else if (error) {
