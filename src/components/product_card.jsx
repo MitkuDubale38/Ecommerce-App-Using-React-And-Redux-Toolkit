@@ -12,7 +12,7 @@ import AddIcon from "@mui/icons-material/AddShoppingCartOutlined";
 
 export default function ProductCard(props) {
   return (
-    <Card sx={{ maxWidth: 345, mb: 5 }} elevation={3}>
+    <Card sx={{ maxWidth: 390, mb: 5 }} elevation={3}>
       <CardMedia sx={{ height: 140 }} image={props.image} title={props.title} />
       <CardContent>
         <Typography gutterBottom variant="h6" component="div" align="left">
@@ -48,7 +48,7 @@ export default function ProductCard(props) {
             : props.description}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
+      <CardActions sx={{ px: 2 }}>
         <Grid
           container
           direction="row"

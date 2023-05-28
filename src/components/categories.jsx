@@ -25,17 +25,15 @@ export default function Category() {
       </div>
     );
   } else if (isSuccess) {
-    const menus = data.map((menu) => {
+    const categoryData =  [...data];
+    categoryData.push( "All");
+    const menus = categoryDatacategoryDactegoryD.map((menu) => {
       return <MenuItem value={menu}>{menu}</MenuItem>;
     });
 
     return (
       <Grid container justify="flex-start">
-        <FormControl
-          sx={{ mt: 3, ml: 3, minWidth: 160 }}
-          size="small"
-          align="left"
-        >
+        <FormControl sx={{ mt: 3, minWidth: 160 }} size="small" align="left">
           <InputLabel id="demo-simple-select-label">Categories</InputLabel>
           <Select
             labelId="demo-simple-select-label"

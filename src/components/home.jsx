@@ -72,18 +72,21 @@ export default function HomePage() {
         <Grid
           pt={3}
           container
-          spacing={12}
+          spacing={1}
           align="center"
           rowSpacing={2}
-          columnSpacing={{ xs: 2, sm: 2, md: 2 }}
+          columnSpacing={{ xs: 1, sm: 1, md: 1 }}
         >
           {products}
         </Grid>
-        <Pagination
-          count={products.length / 10}
-          variant="outlined"
-          shape="rounded"
-        />
+        <div container>
+          <Pagination
+            count={products.length / 10}
+            variant="outlined"
+            shape="rounded"
+            sx={{ mb: 5 }}
+          />
+        </div>
       </div>
     );
   } else if (error) {
