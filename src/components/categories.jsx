@@ -8,6 +8,13 @@ import { useDispatch } from "react-redux";
 import { filterProducts } from "../slices/productSlice";
 import { useGetCategoryQuery } from "../services/categoryAPI";
 
+function titleCase(str) {
+  str = str.toLowerCase().split(" ");
+  for (var i = 0; i < str.length; i++) {
+    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+  }
+  return str.join(" ");
+}
 export default function Category() {
   const dispatch = useDispatch();
   const { data, isSuccess, error, isLoading } = useGetCategoryQuery();
@@ -25,10 +32,10 @@ export default function Category() {
       </div>
     );
   } else if (isSuccess) {
-    const categoryData =  [...data];
-    categoryData.push( "All");
-    const menus = categoryDatacategoryDactegoryD.map((menu) => {
-      return <MenuItem value={menu}>{menu}</MenuItem>;
+    const categoryData = [...data];
+    categoryData.push("All");
+    const menus = categoryData.map((menu) => {
+      return <MenuItem value={menu}>{titleCase(menu)}</MenuItem>;
     });
 
     return (

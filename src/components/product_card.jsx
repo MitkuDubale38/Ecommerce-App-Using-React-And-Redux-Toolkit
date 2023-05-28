@@ -10,6 +10,14 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/AddShoppingCartOutlined";
 
+function titleCase(str) {
+  str = str.toLowerCase().split(" ");
+  for (var i = 0; i < str.length; i++) {
+    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+  }
+  return str.join(" ");
+}
+
 export default function ProductCard(props) {
   return (
     <Card sx={{ maxWidth: 390, mb: 5 }} elevation={3}>
@@ -27,7 +35,7 @@ export default function ProductCard(props) {
           alignItems="center"
         >
           <Typography variant="body2" color="teal">
-            {props.category}
+            {titleCase(props.category)}
           </Typography>
           <Box
             sx={{
