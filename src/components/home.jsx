@@ -2,11 +2,11 @@ import "../styles.css";
 import * as React from "react";
 import { useGetProductsQuery } from "../services/storeAPI";
 import ProductCard from "./product_card";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
 import { useSelector, useDispatch } from "react-redux";
 import { setProducts } from "../slices/productSlice";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function HomePage() {
   const { data, isSuccess, error, isLoading } = useGetProductsQuery();
@@ -17,9 +17,17 @@ export default function HomePage() {
   const dispatch = useDispatch();
   if (isLoading) {
     return (
-      <div className="Home">
-        <p> Loading...</p>
-      </div>
+      <Grid container direction="row" justifyContent="center" align="center">
+        <div className="Home">
+          <ClipLoader
+            color="teal"
+            loading={true}
+            size={50}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+      </Grid>
     );
   } else if (isSuccess) {
     dispatch(setProducts(data));
@@ -27,47 +35,48 @@ export default function HomePage() {
     if (FilteredProducts.length > 0) {
       products = FilteredProducts.map((product) => {
         return (
-          <div key={product.id}>
-            <ProductCard
-              category={product.category}
-              rating={product.rating}
-              image={product.image}
-              title={product.title}
-              description={product.description}
-              price={product.price}
-            />
-          </div>
+          <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+            <div key={product.id}>
+              <ProductCard
+                category={product.category}
+                rating={product.rating}
+                image={product.image}
+                title={product.title}
+                description={product.description}
+                price={product.price}
+              />
+            </div>
+          </Grid>
         );
       });
     } else {
       products = Allproducts.map((product) => {
         return (
-          <div key={product.id}>
-             <Grid container spacing={20}>
-            <ProductCard
-              category={product.category}
-              rating={product.rating}
-              image={product.image}
-              title={product.title}
-              description={product.description}
-              price={product.price}
-            />
-          </div>
+          <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+            <div key={product.id}>
+              <ProductCard
+                category={product.category}
+                rating={product.rating}
+                image={product.image}
+                title={product.title}
+                description={product.description}
+                price={product.price}
+              />
+            </div>
+          </Grid>
         );
       });
     }
     return (
       <div className="Home">
-        {/* <Box
-          m={1}
-          p={2}
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-          }}
-        > */}
-        <Grid container spacing={20}>
+        <Grid
+          pt={3}
+          container
+          spacing={12}
+          align="center"
+          rowSpacing={2}
+          columnSpacing={{ xs: 2, sm: 2, md: 2 }}
+        >
           {products}
         </Grid>
         <Pagination
@@ -75,7 +84,6 @@ export default function HomePage() {
           variant="outlined"
           shape="rounded"
         />
-        {/* </Box> */}
       </div>
     );
   } else if (error) {

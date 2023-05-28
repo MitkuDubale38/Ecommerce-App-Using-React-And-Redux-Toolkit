@@ -6,11 +6,13 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import RatingIcon from "@mui/icons-material/Star";
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import AddIcon from "@mui/icons-material/AddShoppingCartOutlined";
 
 export default function ProductCard(props) {
   return (
-    <Card sx={{ maxWidth: 345, mb: 5 }} elevation={2}>
+    <Card sx={{ maxWidth: 345, mb: 5 }} elevation={3}>
       <CardMedia sx={{ height: 140 }} image={props.image} title={props.title} />
       <CardContent>
         <Typography gutterBottom variant="h6" component="div" align="left">
@@ -18,23 +20,28 @@ export default function ProductCard(props) {
             ? `${props.title.substring(0, 25)}...`
             : props.title}
         </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            color: "yellow",
-          }}
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
         >
           <Typography variant="body2" color="teal">
             {props.category}
           </Typography>
-          <Box sx={{ display: "inline-flex" }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
             <Typography variant="body2" color="text.secondary" align="right">
               {props.rating.rate}
             </Typography>
             <RatingIcon />
           </Box>
-        </Box>
+        </Grid>
         <Typography variant="body2" color="text.secondary" align="left">
           {props.description.length > 100
             ? `${props.description.substring(0, 100)}...`
@@ -42,11 +49,11 @@ export default function ProductCard(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
         >
           <Typography
             variant="body2"
@@ -55,17 +62,12 @@ export default function ProductCard(props) {
             fontWeight="bold"
             fontSize="18px"
           >
-            {props.price}
+            {props.price.toString() + " $"}
           </Typography>
-          <Button
-            size="small"
-            sx={{
-              color: "teal",
-            }}
-          >
+          <Button variant="outlined" color="info" startIcon={<AddIcon />}>
             Add To Cart
           </Button>
-        </Box>
+        </Grid>
       </CardActions>
     </Card>
   );
