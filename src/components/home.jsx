@@ -87,6 +87,7 @@ export default function HomePage() {
             sx={{ mb: 5 }}
           />
         </div>
+       
       </div>
     );
   } else if (error) {
