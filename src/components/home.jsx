@@ -37,14 +37,7 @@ export default function HomePage() {
         return (
           <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
             <div key={product.id}>
-              <ProductCard
-                category={product.category}
-                rating={product.rating}
-                image={product.image}
-                title={product.title}
-                description={product.description}
-                price={product.price}
-              />
+              <ProductCard product={product} />
             </div>
           </Grid>
         );
@@ -54,14 +47,7 @@ export default function HomePage() {
         return (
           <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
             <div key={product.id}>
-              <ProductCard
-                category={product.category}
-                rating={product.rating}
-                image={product.image}
-                title={product.title}
-                description={product.description}
-                price={product.price}
-              />
+              <ProductCard product={product} />
             </div>
           </Grid>
         );
@@ -87,7 +73,6 @@ export default function HomePage() {
             sx={{ mb: 5 }}
           />
         </div>
-       
       </div>
     );
   } else if (error) {

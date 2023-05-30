@@ -9,24 +9,21 @@ import RatingIcon from "@mui/icons-material/Star";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/AddShoppingCartOutlined";
+import { titleCase } from "../utils/utils";
 
-function titleCase(str) {
-  str = str.toLowerCase().split(" ");
-  for (var i = 0; i < str.length; i++) {
-    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
-  }
-  return str.join(" ");
-}
-
-export default function ProductCard(props) {
+export default function ProductCard({ product }) {
   return (
     <Card sx={{ maxWidth: 390, mb: 5 }} elevation={3}>
-      <CardMedia sx={{ height: 140 }} image={props.image} title={props.title} />
+      <CardMedia
+        sx={{ height: 140 }}
+        image={product.image}
+        title={product.title}
+      />
       <CardContent>
         <Typography gutterBottom variant="h6" component="div" align="left">
-          {props.title.length > 25
-            ? `${props.title.substring(0, 25)}...`
-            : props.title}
+          {product.title.length > 25
+            ? `${product.title.substring(0, 25)}...`
+            : product.title}
         </Typography>
         <Grid
           container
@@ -35,7 +32,7 @@ export default function ProductCard(props) {
           alignItems="center"
         >
           <Typography variant="body2" color="teal">
-            {titleCase(props.category)}
+            {titleCase(product.category)}
           </Typography>
           <Box
             sx={{
@@ -45,15 +42,15 @@ export default function ProductCard(props) {
             }}
           >
             <Typography variant="body2" color="text.secondary" align="right">
-              {props.rating.rate}
+              {product.rating.rate}
             </Typography>
             <RatingIcon />
           </Box>
         </Grid>
         <Typography variant="body2" color="text.secondary" align="left">
-          {props.description.length > 100
-            ? `${props.description.substring(0, 100)}...`
-            : props.description}
+          {product.description.length > 100
+            ? `${product.description.substring(0, 100)}...`
+            : product.description}
         </Typography>
       </CardContent>
       <CardActions sx={{ px: 2 }}>
@@ -70,7 +67,7 @@ export default function ProductCard(props) {
             fontWeight="bold"
             fontSize="18px"
           >
-            {props.price.toString() + " $"}
+            {product.price.toString() + " $"}
           </Typography>
           <Button variant="outlined" color="info" startIcon={<AddIcon />}>
             Add To Cart
