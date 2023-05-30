@@ -8,6 +8,14 @@ import { useDispatch } from "react-redux";
 import { filterProducts } from "../slices/productSlice";
 import { useGetCategoryQuery } from "../services/categoryAPI";
 
+
+function titleCase(str) {
+  str = str.toLowerCase().split(" ");
+  for (var i = 0; i < str.length; i++) {
+    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+  }
+  return str.join(" ");
+}
 export default function Category() {
   const dispatch = useDispatch();
   const { data, isSuccess, error, isLoading } = useGetCategoryQuery();
@@ -25,17 +33,15 @@ export default function Category() {
       </div>
     );
   } else if (isSuccess) {
-    const menus = data.map((menu) => {
-      return <MenuItem value={menu}>{menu}</MenuItem>;
+    const categoryData = [...data];
+    categoryData.push("All");
+    const menus = categoryData.map((menu) => {
+      return <MenuItem value={menu}>{titleCase(menu)}</MenuItem>;
     });
 
     return (
       <Grid container justify="flex-start">
-        <FormControl
-          sx={{ mt: 3, ml: 3, minWidth: 160 }}
-          size="small"
-          align="left"
-        >
+        <FormControl sx={{ mt: 3, minWidth: 160 }} size="small" align="left">
           <InputLabel id="demo-simple-select-label">Categories</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -48,6 +54,7 @@ export default function Category() {
             {menus}
           </Select>
         </FormControl>
+       
       </Grid>
     );
   } else if (error) {
