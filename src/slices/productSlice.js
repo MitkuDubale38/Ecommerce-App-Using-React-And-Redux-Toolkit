@@ -5,10 +5,14 @@ export const productSlice = createSlice({
   initialState: {
     products: [],
     filteredProducts: [],
+    searchedProducts: [],
   },
   reducers: {
     setProducts: (state, action) => {
       state.products = action.payload;
+    },
+    setSearchedProducts: (state, action) => {
+      state.searchedProducts = action.payload;
     },
     filterProducts: (state, action) => {
       state.filteredProducts = state.products.filter(
@@ -16,13 +20,18 @@ export const productSlice = createSlice({
       );
     },
     searchProducts: (state, action) => {
-      state.filteredProducts = state.products.filter((element) =>
+      const filteredResult = state.products.filter((element) =>
         element.title.toLowerCase().includes(action.payload.toLowerCase())
-      );;
+      );
+      state.searchedProducts = filteredResult;
     },
   },
 });
 
-export const { setProducts, filterProducts, searchProducts } =
-  productSlice.actions;
+export const {
+  setProducts,
+  setSearchedProducts,
+  filterProducts,
+  searchProducts,
+} = productSlice.actions;
 export default productSlice.reducer;
