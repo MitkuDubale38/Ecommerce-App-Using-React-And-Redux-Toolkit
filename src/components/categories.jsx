@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 import { filterProducts } from "../slices/productSlice";
 import { useGetCategoryQuery } from "../services/categoryAPI";
 
-
 function titleCase(str) {
   str = str.toLowerCase().split(" ");
   for (var i = 0; i < str.length; i++) {
@@ -54,7 +53,6 @@ export default function Category() {
             {menus}
           </Select>
         </FormControl>
-       
       </Grid>
     );
   } else if (error) {

@@ -18,6 +18,9 @@ export default function HomePage() {
     (state) => state.products.searchedProducts
   );
 
+  const isSearcingFilterdProducts = useSelector(
+    (state) => state.products.isSearchingFillterdProducts
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,7 +28,7 @@ export default function HomePage() {
       dispatch(setProducts(data));
       dispatch(setSearchedProducts(data));
     }
-  }, [data]);
+  }, []);
 
   if (isLoading) {
     return (
@@ -44,15 +47,27 @@ export default function HomePage() {
   } else if (isSuccess) {
     var products;
     if (FilteredProducts.length > 0) {
-      products = FilteredProducts.map((product) => {
-        return (
-          <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-            <div key={product.id}>
-              <ProductCard product={product} />
-            </div>
-          </Grid>
-        );
-      });
+      if (isSearcingFilterdProducts === true) {
+        products = SearchedProducts.map((product) => {
+          return (
+            <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+              <div key={product.id}>
+                <ProductCard product={product} />
+              </div>
+            </Grid>
+          );
+        });
+      } else {
+        products = FilteredProducts.map((product) => {
+          return (
+            <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+              <div key={product.id}>
+                <ProductCard product={product} />
+              </div>
+            </Grid>
+          );
+        });
+      }
     } else {
       products = SearchedProducts.map((product) => {
         return (
