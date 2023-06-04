@@ -6,6 +6,7 @@ export const productSlice = createSlice({
     products: [],
     filteredProducts: [],
     searchedProducts: [],
+    isSearchingFillterdProducts: false,
   },
   reducers: {
     setProducts: (state, action) => {
@@ -20,10 +21,19 @@ export const productSlice = createSlice({
       );
     },
     searchProducts: (state, action) => {
-      const filteredResult = state.products.filter((element) =>
-        element.title.toLowerCase().includes(action.payload.toLowerCase())
-      );
-      state.searchedProducts = filteredResult;
+      if (state.filteredProducts.length !== 0) {
+        const filteredResult = state.filteredProducts.filter((element) =>
+          element.title.toLowerCase().includes(action.payload.toLowerCase())
+        );
+        state.searchedProducts = filteredResult;
+        state.isSearchingFillterdProducts = true;
+      } else {
+        const filteredResult = state.products.filter((element) =>
+          element.title.toLowerCase().includes(action.payload.toLowerCase())
+        );
+        state.searchedProducts = filteredResult;
+         state.isSearchingFillterdProducts = false;
+      }
     },
   },
 });
